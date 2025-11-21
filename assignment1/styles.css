@@ -1,0 +1,249 @@
+/* ============================================================
+   🌐 GLOBAL LAYOUT STYLES
+   ============================================================ */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background: linear-gradient(to bottom right, #eaf5ff, #ffffff);
+    color: #004B87;
+}
+
+/* ============================================================
+   🧱 HEADER SECTION
+   ============================================================ */
+header {
+    background-color: #5DA9E9;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+header h3 {
+    margin-top: 5px;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #eaf5ff;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   📦 MAIN CONTAINER LAYOUT
+   ============================================================ */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    height: calc(100vh - 120px);
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 20px;
+}
+
+/* ============================================================
+   🎲 LEFT PANEL (Dice Area)
+   ============================================================ */
+#dice-panel {
+    flex: 1;
+    background-color: #F2F4F7;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+#dice-panel h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Dice row container */
+#dice-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+/* === Individual Die Styling (3x3 grid for pips) === */
+.die {
+    width: 70px;
+    height: 70px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    border: 2px solid #5DA9E9;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 10px;
+    justify-items: center;
+    align-items: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+}
+.die:hover {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+}
+
+/* === Pips (dots) === */
+.pip {
+    width: 10px;
+    height: 10px;
+    background-color: #004B87;
+    border-radius: 50%;
+    opacity: 0;
+}
+.die[data-face="1"] .p5 {opacity:1;}
+.die[data-face="2"] .p1, .die[data-face="2"] .p9 {opacity:1;}
+.die[data-face="3"] .p1, .die[data-face="3"] .p5, .die[data-face="3"] .p9 {opacity:1;}
+.die[data-face="4"] .p1, .die[data-face="4"] .p3, .die[data-face="4"] .p7, .die[data-face="4"] .p9 {opacity:1;}
+.die[data-face="5"] .p1, .die[data-face="5"] .p3, .die[data-face="5"] .p5, .die[data-face="5"] .p7, .die[data-face="5"] .p9 {opacity:1;}
+.die[data-face="6"] .p1, .die[data-face="6"] .p3, .die[data-face="6"] .p4, .die[data-face="6"] .p6, .die[data-face="6"] .p7, .die[data-face="6"] .p9 {opacity:1;}
+.die[aria-pressed="true"] {background:#e3f2ff; box-shadow:0 6px 12px rgba(0,0,0,0.18);}
+
+/* Controls under dice */
+.controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 12px 0;
+}
+.controls button {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #5DA9E9;
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.12);
+}
+.controls button[disabled] {opacity:0.6; cursor:not-allowed;}
+.status {text-align:center; margin-top:8px; font-weight:500;}
+
+/* ============================================================
+   📊 RIGHT PANEL (Scoreboard)
+   ============================================================ */
+#scoreboard {
+    flex: 1;
+    background-color: #F2F4F7;
+    border-radius: 16px;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+}
+#scoreboard h2 {
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 15px;
+    text-align: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+th {
+    background-color: #5DA9E9;
+    color: white;
+    font-weight: 600;
+}
+td {color: #004B87;}
+tbody tr:hover:not(.scored) {background-color:#eef6ff;}
+.total-row td {
+    background-color: #5DA9E9;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+
+/* ============================================================
+   📜 GAME RULES SECTION
+   ============================================================ */
+#rules {
+    background: #F2F4F7;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+#rules h3 {
+    text-align: center;
+    color: #004B87;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 14px;
+}
+#rules ul {
+    list-style-type: disc;
+    max-width: 700px;
+    margin: auto;
+    color: #004B87;
+    font-size: 1.15rem;
+    line-height: 1.9;
+}
+
+/* ============================================================
+   ⚓ FOOTER SECTION
+   ============================================================ */
+footer {
+    background-color: #5DA9E9;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+
+/* ============================================================
+   📱 RESPONSIVE + MATCHED STACK SIZE
+   ============================================================ */
+@media (max-width: 900px) {
+    .container {flex-direction: column;}
+    .die {width: 64px; height: 64px;}
+
+    /* Make all cards (Dice, Scoreboard, Rules) same width and feel */
+    #dice-panel,
+    #scoreboard,
+    #rules {
+        width: 100%;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        margin: 0;
+    }
+
+    #scoreboard h2 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+
+    #scoreboard table {
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        font-size: 1rem;
+    }
+
+    #scoreboard th,
+    #scoreboard td {
+        padding: 10px 12px;
+    }
+}
