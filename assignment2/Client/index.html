@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>🎲 Yatzy Game — Assignment 2</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!--  Lab 8 style: add jQuery for dice animation -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<header>
+    <h1>🎲 Yatzy Game</h1>
+    <h3>Assignment 2 – Node.js + Express</h3>
+</header>
+
+<main class="container">
+    <!-- LEFT: Dice panel -->
+    <section id="dice-panel">
+        <h2>Dice Panel</h2>
+
+        <!-- 5 dice buttons; pips are injected by JS -->
+        <div id="dice-row" aria-live="polite"></div>
+
+        <div class="controls">
+            <button id="rollBtn" disabled>Roll (3)</button>
+            <button id="endTurnBtn" disabled>End Turn</button>
+            <button id="newGameBtn">New Game</button>
+        </div>
+
+        <p id="status" class="status">Creating game…</p>
+    </section>
+
+    <!-- RIGHT: Scoreboard -->
+    <section id="scoreboard">
+        <h2>Scoreboard</h2>
+        <table>
+            <thead>
+            <tr><th>Category</th><th>Scoring Rule</th><th>Points</th></tr>
+            </thead>
+            <tbody id="scoreRows">
+            <tr data-cat="Ones"><td>Ones</td><td>Sum of all 1s rolled</td><td class="pts">–</td></tr>
+            <tr data-cat="Twos"><td>Twos</td><td>Sum of all 2s rolled</td><td class="pts">–</td></tr>
+            <tr data-cat="Threes"><td>Threes</td><td>Sum of all 3s rolled</td><td class="pts">–</td></tr>
+            <tr data-cat="Fours"><td>Fours</td><td>Sum of all 4s rolled</td><td class="pts">–</td></tr>
+            <tr data-cat="Fives"><td>Fives</td><td>Sum of all 5s rolled</td><td class="pts">–</td></tr>
+            <tr data-cat="Sixes"><td>Sixes</td><td>Sum of all 6s rolled</td><td class="pts">–</td></tr>
+            <tr data-cat="Three of a Kind"><td>Three of a Kind</td><td>Three dice same → sum all dice</td><td class="pts">–</td></tr>
+            <tr data-cat="Four of a Kind"><td>Four of a Kind</td><td>Four dice same → sum all dice</td><td class="pts">–</td></tr>
+            <tr data-cat="Full House"><td>Full House</td><td>3 of a kind + pair → 25</td><td class="pts">–</td></tr>
+            <tr data-cat="Small Straight"><td>Small Straight</td><td>1-2-3-4-5 → 30</td><td class="pts">–</td></tr>
+            <tr data-cat="Large Straight"><td>Large Straight</td><td>2-3-4-5-6 → 40</td><td class="pts">–</td></tr>
+            <tr data-cat="Chance"><td>Chance</td><td>Sum of all dice</td><td class="pts">–</td></tr>
+            <tr data-cat="Yatzy"><td>Yatzy</td><td>All five same → 50</td><td class="pts">–</td></tr>
+            </tbody>
+            <tfoot>
+            <tr class="total-row">
+                <td colspan="2"><strong>Total</strong></td>
+                <td id="totalScore"><strong>0</strong></td>
+            </tr>
+            </tfoot>
+        </table>
+        <p class="hint">After rolling, click a category to score this turn.</p>
+    </section>
+</main>
+
+<!-- Rules (below both panels) -->
+<section id="rules">
+    <h3>🎯 Game Rules</h3>
+    <ul>
+        <li>Roll five dice — you have up to <strong>three rolls</strong> per turn.</li>
+        <li>Click a die to <strong>hold</strong> it before re-rolling.</li>
+        <li>After rolling, click a <strong>scoreboard category</strong> to record your score for the turn.</li>
+        <li>Each category may be scored only <strong>once</strong>.</li>
+        <li>The game ends when all categories are filled. Highest total wins.</li>
+    </ul>
+</section>
+
+<footer>© 2025 Yatzy by Lucas Muteta</footer>
+
+<!-- Client logic talks to the Node/Express server via fetch -->
+<script type="module" src="main.js"></script>
+</body>
+</html>
